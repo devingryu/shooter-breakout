@@ -1,18 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class Brick : MonoBehaviour
+namespace SBR
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Brick : MonoBehaviour
     {
-        
-    }
+        public TextMeshProUGUI[] texts;
+        private int health;
+        public int Health
+        {
+            get => health;
+            set
+            {
+                health = value;
+                foreach (var t in texts)
+                    t.text = health.ToString();
+            }
+        }
+        private XYZ coord;
+        public XYZ Coord
+        {
+            get => coord;
+            set {
+                coord = value;
+                transform.position = GameManager.Inst.grid.getPosFromCoord(value);
+            }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Init(int health, XYZ coord) 
+        {
+            Health = health;
+            Coord = coord;
+        }
+        private void OnCollisionEnter(Collision other)
+        {
+            Health--;
+        }
     }
 }
