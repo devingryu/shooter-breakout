@@ -15,8 +15,11 @@ namespace SBR
             set
             {
                 health = value;
+                if (health <= 0)
+                    Destroy(gameObject);
                 foreach (var t in texts)
                     t.text = health.ToString();
+
             }
         }
         private XYZ coord;

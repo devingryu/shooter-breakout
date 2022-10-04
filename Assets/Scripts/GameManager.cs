@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Valve.VR.InteractionSystem;
 using UnityEngine;
 
 namespace SBR
@@ -7,8 +8,14 @@ namespace SBR
     public class GameManager : Singleton<GameManager>
     {
         protected GameManager() { }
-        public BrickSpawner spawner = new BrickSpawner();
-        public Grid grid = new Grid();
+        public BrickSpawner spawner;
+        public Grid grid;
+        
+        public GameObject gun;
+        public Hand hand;
+        private Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags
+            & (~Hand.AttachmentFlags.SnapOnAttach)
+            & (~Hand.AttachmentFlags.DetachOthers);
 
         private int round = 0;
         public int Round
@@ -21,7 +28,6 @@ namespace SBR
         }
         void Start()
         {
-            
         }
 
         // Update is called once per frame
