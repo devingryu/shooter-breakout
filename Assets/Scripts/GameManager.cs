@@ -13,9 +13,6 @@ namespace SBR
         
         public GameObject gun;
         public Hand hand;
-        private Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags
-            & (~Hand.AttachmentFlags.SnapOnAttach)
-            & (~Hand.AttachmentFlags.DetachOthers);
 
         private int round = 0;
         public int Round

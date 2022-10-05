@@ -217,6 +217,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1039851983 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11401046, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+  m_PrefabInstance: {fileID: 1625136886}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1566383151
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,8 +241,8 @@ GameObject:
   - component: {fileID: 1566383153}
   - component: {fileID: 1566383152}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: Floor
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -378,6 +389,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2687311945687979602, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
+      propertyPath: HoldingHand
+      value: 
+      objectReference: {fileID: 1039851983}
     - target: {fileID: 2687311945687979604, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
       propertyPath: m_Name
       value: M1911 Handgun_Black
@@ -425,6 +440,38 @@ PrefabInstance:
     - target: {fileID: 3600668034699847001, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834752644781574786, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834752644781574786, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 58586049ca977a849bb5afa93f6ab95c, type: 2}
+    - target: {fileID: 3834752644781574786, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
+      propertyPath: m_Parameters.numCapVertices
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834752644781574786, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834752644781574786, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
+      propertyPath: m_Parameters.numCornerVertices
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834752644781574786, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834752644781574786, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184404881391356368, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
+      propertyPath: Reflections
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4940767d5ee099340b170a40d9b39cd4, type: 3}
