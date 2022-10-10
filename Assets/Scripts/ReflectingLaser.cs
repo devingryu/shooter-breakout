@@ -24,7 +24,7 @@ public class ReflectingLaser : MonoBehaviour
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, transform.position);
         float remainingLength = MaxLength;
-        var layermask = ~(1 << LayerMask.NameToLayer("Bullet"));
+        var layermask = ~(1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("BulletGrave"));
         for (int i=0; i< Reflections; i++)
         {
             
@@ -34,8 +34,6 @@ public class ReflectingLaser : MonoBehaviour
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 remainingLength -= Vector3.Distance(ray.origin, hit.point);
                 ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
-                //if(hit.collider.tag != "Wall" && hit.collider.tag != "Brick")
-                //    break; 
             }
             else
             {

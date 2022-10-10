@@ -954,7 +954,7 @@ namespace Valve.VR.InteractionSystem
 		{
 			CancelTeleportHint();
 
-			hintCoroutine = StartCoroutine( TeleportHintCoroutine() );
+			//hintCoroutine = StartCoroutine( TeleportHintCoroutine() );
 		}
 
 

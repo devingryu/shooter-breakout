@@ -9,6 +9,8 @@ namespace SBR
         [SerializeField]
         private GameObject wall;
         [SerializeField]
+        private GameObject bulletGrave;
+        [SerializeField]
         private Transform boundaries;
         // X, Y, Z
         [SerializeField]
@@ -64,6 +66,7 @@ namespace SBR
             Instantiate(wall, new Vector3(gridBound[1].x+(brickBound.x+0.05f)/2,pos.y, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(0.05f,wht.y,wht.z);
 
             //ZWall
+            Instantiate(bulletGrave, new Vector3(pos.x, pos.y, gridBound[0].z-(brickBound.z+0.05f)/2),Quaternion.identity, boundaries).transform.localScale = new Vector3(wht.x,wht.y,0.05f);
             Instantiate(wall, new Vector3(pos.x, pos.y, gridBound[1].z+(brickBound.z+0.05f)/2),Quaternion.identity, boundaries).transform.localScale = new Vector3(wht.x,wht.y,0.05f);
         }
     }
