@@ -35,5 +35,7 @@ namespace SBR
             => new XYZ(x == null ? X : (int)x, y == null ? Y : (int)y, z == null ? Z : (int)z);
         public XYZ move(int x = 0, int y = 0, int z = 0)
             => new XYZ(X+x,Y+y,Z+z);
+
+        public override string ToString() => $"({X},{Y},{Z})";
     }
 }

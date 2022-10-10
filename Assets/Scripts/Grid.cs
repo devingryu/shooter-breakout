@@ -6,17 +6,20 @@ namespace SBR
 {
     public class Grid : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject wall;
+        [SerializeField]
+        private Transform boundaries;
         // X, Y, Z
         [SerializeField]
-        private int[] gridCount = new int[3] { 5, 1, 10 };
+        private int[] gridCount = new int[3] { 5, 1, 10 };// x: 왼쪽에서 오른쪽, y: 아래에서 위, z: 앞에서 뒤
         [SerializeField]
         private float gridCenterX = 0f;
         [SerializeField]
         private float gridStartZ = 0f;
 
-
         [SerializeField]
-        private Vector3 brickBound = new Vector3(1.8f, 1f, 1f);
+        private Vector3 brickBound = new Vector3(1.6f, 1f, 1f);
 
         // 기준 벽돌 좌표, 위치
         private XYZ StdBrickCoord;
@@ -38,6 +41,7 @@ namespace SBR
                 for(int j=0;j<gridCount[1];j++)
                     for(int k=0;k<gridCount[2];k++)
                         bricks[i,j,k] = null;
+            PlaceWalls();
         }
 
         public Vector3 getPosFromCoord(XYZ coord)
@@ -46,6 +50,21 @@ namespace SBR
             for (int i = 0; i < 3; i++)
                 pos[i] = StdBrickPos[i] + ((coord[i] - StdBrickCoord[i]) * brickBound[i]);
             return pos;
+        }
+        public void PlaceWalls()
+        {
+            Vector3 wht = gridBound[1]-gridBound[0]+brickBound;
+            Vector3 pos = (gridBound[1]+gridBound[0])/2f;
+            // YWall
+            Instantiate(wall, new Vector3(pos.x,gridBound[0].y-(brickBound.y+0.05f)/2, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(wht.x,0.05f,wht.z);
+            Instantiate(wall, new Vector3(pos.x,gridBound[1].y+(brickBound.y+0.05f)/2, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(wht.x,0.05f,wht.z);
+
+            //XWall
+            Instantiate(wall, new Vector3(gridBound[0].x-(brickBound.x+0.05f)/2,pos.y, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(0.05f,wht.y,wht.z);
+            Instantiate(wall, new Vector3(gridBound[1].x+(brickBound.x+0.05f)/2,pos.y, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(0.05f,wht.y,wht.z);
+
+            //ZWall
+            Instantiate(wall, new Vector3(pos.x, pos.y, gridBound[1].z+(brickBound.z+0.05f)/2),Quaternion.identity, boundaries).transform.localScale = new Vector3(wht.x,wht.y,0.05f);
         }
     }
 }
