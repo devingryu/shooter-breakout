@@ -13,8 +13,7 @@ namespace SBR
         [SerializeField]
         private Transform boundaries;
         // X, Y, Z
-        [SerializeField]
-        private int[] gridCount = new int[3] { 5, 1, 10 };// x: 왼쪽에서 오른쪽, y: 아래에서 위, z: 앞에서 뒤
+        public readonly int[] gridCount = new int[3] { 5, 1, 10 };// x: 왼쪽에서 오른쪽, y: 아래에서 위, z: 앞에서 뒤
         [SerializeField]
         private float gridCenterX = 0f;
         [SerializeField]
@@ -32,7 +31,7 @@ namespace SBR
 
         public Brick[,,] bricks;
 
-        void Start()
+        private void Awake()
         {
             StdBrickCoord = new XYZ(((gridCount[0] % 2 == 0) ? (gridCount[0] - 2) : (gridCount[0] - 1)) / 2, 0, 0);
             StdBrickPos = new Vector3((gridCount[0] % 2 == 0) ? gridCenterX - (brickBound.x / 2) : gridCenterX, brickBound[1]/2f, gridStartZ);

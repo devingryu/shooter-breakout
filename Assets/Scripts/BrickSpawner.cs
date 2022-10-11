@@ -14,6 +14,7 @@ namespace SBR
         void Start()
         {
             gm = GameManager.Inst;
+            gm.minimap.Init();
             SpwanLine();
         }
 
@@ -28,7 +29,8 @@ namespace SBR
             XYZ[] bricks = {new(1,0,8), new(3,0,8), new(0,0,0), new(4,0,0)};
             foreach(var b in bricks){
                 var newBrick = Instantiate(brick, brickParent);
-                newBrick.GetComponent<Brick>().Init(++round, b);
+                newBrick.GetComponent<Brick>().Init(++round, b);;
+                gm.minimap.OnBrickUpdate(b);
             }
         }
     }

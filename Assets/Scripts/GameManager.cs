@@ -10,6 +10,7 @@ namespace SBR
         protected GameManager() { }
         public BrickSpawner spawner;
         public Grid grid;
+        public Minimap minimap;
         
         public GameObject gun;
         public Hand hand;
@@ -25,6 +26,7 @@ namespace SBR
         }
         void Start()
         {
+            
         }
 
         // Update is called once per frame
