@@ -49,3 +49,5 @@ MonoBehaviour:
   currentY: 0
   uiBrickPrefab: {fileID: 5168273416410523738, guid: b5bbb2cb9e7fc414d94a2527fb20da6c, type: 3}
   uiBackgroundPrefab: {fileID: 5168273416410523738, guid: e8fe1f8afc9d2c34881371f7019af006, type: 3}
+  uiBallPrefab: {fileID: 7475296374934886636, guid: 59a7194a79b382f4aaa309937063eae4, type: 3}
+  gridBound: []

@@ -20,14 +20,14 @@ namespace SBR
         private float gridStartZ = 0f;
 
         [SerializeField]
-        private Vector3 brickBound = new Vector3(1.6f, 1f, 1f);
+        public readonly Vector3 brickBound = new Vector3(1.6f, 1f, 1f);
 
         // 기준 벽돌 좌표, 위치
         private XYZ StdBrickCoord;
         private Vector3 StdBrickPos;
 
         // 그리드 경계 (min(0,0,0), max(gridCount))
-        private Vector3[] gridBound;
+        public Vector3[] gridBound;
 
         public Brick[,,] bricks;
 
