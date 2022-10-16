@@ -21,20 +21,9 @@ namespace SBR
                 gameObject.SetActive(value > 0);
             }
         }
-        public void Init(XYZ pos)
+        public void Init(Vector3 pos)
         {
-            var vec3 = GameManager.Inst.minimap.getPosFromCoord(pos);
-            transform.localPosition = new(vec3.x,vec3.z,0);
-        }
-        void Start()
-        {
-            
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
+            transform.localPosition = new(pos.x,pos.z,0);
         }
     }
 }

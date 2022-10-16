@@ -10,10 +10,8 @@ namespace SBR
         protected GameManager() { }
         public BrickSpawner spawner;
         public Grid grid;
-        public Minimap minimap;
-        
-        public GameObject gun;
-        public Hand hand;
+        [HideInInspector]
+        public MinimapManager minimap;
 
         private int round = 0;
         public int Round
@@ -24,15 +22,9 @@ namespace SBR
                 round = value;
             }
         }
-        void Start()
+        private void Awake() 
         {
-            
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            minimap = GetComponent<MinimapManager>();
         }
     }
 }

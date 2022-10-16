@@ -7,7 +7,7 @@ namespace SBR
 {
     public class Brick : MonoBehaviour
     {
-        private Minimap minimap;
+        private MinimapManager minimap;
         public TextMeshProUGUI[] texts;
         private int health;
         public int Health

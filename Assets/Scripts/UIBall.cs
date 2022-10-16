@@ -10,6 +10,8 @@ namespace SBR
         private float scaleFactor;
         private Vector3[] gridBound;
         private SpriteRenderer ren;
+        private Minimap attachedMinimap;
+        private bool isInit = false;
         private void Awake() 
         {
             ren = GetComponent<SpriteRenderer>();
@@ -17,14 +19,16 @@ namespace SBR
         public void Init(Transform pair)
         {
             GameManager m = GameManager.Inst;
+            attachedMinimap = transform.parent.parent.GetComponent<Minimap>();
             gridBound = (Vector3[])m.grid.gridBound.Clone();
             gridBound[0] -= (m.grid.brickBound/2); gridBound[1] += (m.grid.brickBound/2);
-
+            
             Vector3 whtg = m.grid.gridBound[1]-m.grid.gridBound[0]+m.grid.brickBound;
-            Vector3 whtm = m.minimap.gridBound[1]-m.minimap.gridBound[0]+m.minimap.brickBound;
+            Vector3 whtm = attachedMinimap.gridBound[1]-attachedMinimap.gridBound[0]+attachedMinimap.brickBound;
             scaleFactor = whtm[0] / whtg[0];
 
             this.pair = pair;
+            isInit = true;
         }
 
         // Update is called once per frame
@@ -32,6 +36,7 @@ namespace SBR
         {
             try
             {
+                if(!isInit) return;
                 if (pair != null)
                 {
                     for(int i=0;i<3;i++)
@@ -42,6 +47,10 @@ namespace SBR
 
                     ren.enabled = true;
                     gameObject.transform.localPosition = new(pair.position.x * scaleFactor,pair.position.z *scaleFactor, 0f);
+                } 
+                else 
+                {
+                    Destroy(gameObject);
                 }
             }
             catch { }

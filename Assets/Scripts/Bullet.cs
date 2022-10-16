@@ -9,14 +9,13 @@ namespace SBR
         private Rigidbody rb;
         private Vector3 direction;
         public float SpeedMultiplier => 4f;
-        public UIBall pair;
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
             direction = transform.forward;
             rb.velocity = direction * SpeedMultiplier;
-            pair = GameManager.Inst.minimap.newBall();
-            pair.Init(transform);
+            GameManager.Inst.minimap.NewBall(transform);
+            //pair.Init(transform);
         }
 
         private void OnCollisionEnter(Collision other) 
@@ -24,8 +23,6 @@ namespace SBR
             direction = Vector3.Reflect(direction, other.contacts[0].normal).normalized;
             rb.velocity = direction * SpeedMultiplier;
         }
-        private void OnDestroy() 
-            => Destroy(pair.gameObject);
         
     }
 }
