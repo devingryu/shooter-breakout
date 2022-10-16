@@ -18,6 +18,8 @@ namespace SBR
         private int[] gridCount;
         [SerializeField]
         private GameObject uiBrickPrefab;
+        [SerializeField]
+        private GameObject uiBackgroundPrefab;
         private Grid grid;
         private readonly Vector3 brickBound = new(0.2f,0f,0.125f);
         private Vector3[] gridBound;
@@ -40,7 +42,14 @@ namespace SBR
                     bricks[i,k] = newUIBrick.GetComponent<UIBrick>();
                     bricks[i,k].Init(new(i,0,k));
                 }
-            Debug.Log("Init Complete");
+            Debug.Log($"{gridBound[0]} {gridBound[1]}");
+            var grdbndsum = (gridBound[0] + gridBound[1])/2f;
+            var grdbndmns = gridBound[1] - gridBound[0] + brickBound;
+        
+            var bg = Instantiate(uiBackgroundPrefab, Vector3.zero, Quaternion.Euler(0f,-90f,0f), transform);
+            bg.transform.localPosition = new Vector3(gridCenterX+grdbndsum.x, gridStartZ+grdbndsum.z, 0f);
+            bg.transform.localScale = new Vector3(grdbndmns.x*2f,grdbndmns.z*2f,1f);
+            //Debug.Log("Init Complete");
         }
         public Vector3 getPosFromCoord(XYZ coord)
         {

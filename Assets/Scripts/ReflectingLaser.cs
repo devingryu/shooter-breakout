@@ -12,9 +12,11 @@ public class ReflectingLaser : MonoBehaviour
     private Ray ray;
     private RaycastHit hit;
     private Vector3 direction;
+    private int layermask;
 
     private void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
+        layermask = ~(1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("BulletGrave") | 1 << LayerMask.NameToLayer("Hand"));
     }
     // Update is called once per frame
     void Update()
@@ -24,7 +26,7 @@ public class ReflectingLaser : MonoBehaviour
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, transform.position);
         float remainingLength = MaxLength;
-        var layermask = ~(1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("BulletGrave"));
+        
         for (int i=0; i< Reflections; i++)
         {
             
@@ -33,6 +35,7 @@ public class ReflectingLaser : MonoBehaviour
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 remainingLength -= Vector3.Distance(ray.origin, hit.point);
+                if(hit.transform.tag != "Wall" && hit.transform.tag != "Brick") break;
                 ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
             }
             else

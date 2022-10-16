@@ -26,7 +26,7 @@ namespace SBR
         public void SpwanLine()
         {
             int round = gm.Round++;
-            XYZ[] bricks = {new(1,0,8), new(3,0,8), new(0,0,0), new(4,0,0)};
+            XYZ[] bricks = {new(1,0,8), new(3,0,8), new(0,0,0), new(4,0,0), new(0,0,9), new(4,0,9)};
             foreach(var b in bricks){
                 var newBrick = Instantiate(brick, brickParent);
                 newBrick.GetComponent<Brick>().Init(++round, b);;
