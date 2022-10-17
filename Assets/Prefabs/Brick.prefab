@@ -391,6 +391,7 @@ MonoBehaviour:
   - {fileID: 549186179401470794}
   - {fileID: 1612086866234505490}
   - {fileID: 68918685210990873}
+  isBrick: 1
 --- !u!1 &2645517579590520036
 GameObject:
   m_ObjectHideFlags: 0

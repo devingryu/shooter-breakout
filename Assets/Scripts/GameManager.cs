@@ -12,6 +12,13 @@ namespace SBR
         public Grid grid;
         [HideInInspector]
         public MinimapManager minimap;
+        private int maxBallCount = 1;
+        public int MaxBallCount {
+            get => maxBallCount;
+            set {
+                maxBallCount = value;
+            }
+        }
 
         private int round = 0;
         public int Round
