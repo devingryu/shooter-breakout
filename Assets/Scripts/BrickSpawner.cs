@@ -8,6 +8,8 @@ namespace SBR
     {
         private GameManager gm;
         [SerializeField]
+        private GameObject item;
+        [SerializeField]
         private GameObject brick;
         [SerializeField]
         private Transform brickParent;
@@ -45,6 +47,14 @@ namespace SBR
                 newBrick.GetComponent<Brick>().Init(round, xyz);;
                 gm.minimap.OnBrickUpdate(xyz);
             }
+
+            currentBrick = Random.Range(0, max);
+            while (bricks.Contains(currentBrick))
+                currentBrick = Random.Range(0, max);
+            XYZ itemxyz = new XYZ(currentBrick % gm.grid.gridCount[0], currentBrick / gm.grid.gridCount[0], gm.grid.gridCount[2] - 1);
+            var newItem = Instantiate(item, brickParent);
+            newItem.GetComponent<Brick>().Init(round, itemxyz); ;
+            gm.minimap.OnBrickUpdate(itemxyz);
         }
         
         public void MoveObjects()
