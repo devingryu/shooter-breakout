@@ -58,6 +58,8 @@ namespace SBR
         {
             if(isBrick) return;
             GameManager.Inst.MaxBallCount++;
+            GameManager.Inst.grid.bricks[Coord.X,Coord.Y,Coord.Z] = null;
+            Destroy(gameObject);
         }
     }
 }
