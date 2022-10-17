@@ -15,7 +15,7 @@ namespace SBR
         // 기준 벽돌 좌표, 위치
         private XYZ StdBrickCoord;
         private Vector3 StdBrickPos;
-        private int currentY = 1;
+        private int currentY = 0;
         public int CurrentY {
             get => currentY;
             set {
@@ -74,11 +74,12 @@ namespace SBR
         }
         public void OnBrickUpdate(XYZ pos)
         {
-            //Debug.Log($"OnBrickUpdate: {pos}");
             if(currentY != pos.Y) return;
             var gridbrick = grid.bricks[pos.X,pos.Y,pos.Z];
-            if(gridbrick != null) 
+            if(gridbrick != null) {
+                bricks[pos.X,pos.Z].IsBrick = gridbrick.isBrick;
                 bricks[pos.X,pos.Z].Health = gridbrick.Health;
+            }
             else
                 bricks[pos.X, pos.Z].Health = 0;
         }

@@ -13,7 +13,7 @@ namespace SBR
         private Minimap attachedMinimap;
         private bool isInit = false;
         private Vector3 brickBound;
-        public int currentY = 1;
+        public int currentY = 0;
         private void Awake() 
         {
             ren = GetComponent<SpriteRenderer>();

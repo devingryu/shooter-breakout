@@ -16,14 +16,14 @@ namespace SBR
             get => health;
             set
             {
+                health = value;
+                if(coord != null)
+                    minimap.OnBrickUpdate(coord);
+                if (health <= 0){
+                    GameManager.Inst.grid.bricks[Coord.X,Coord.Y,Coord.Z] = null;
+                    Destroy(gameObject);
+                }
                 if(isBrick) {
-                    health = value;
-                    if(coord != null)
-                        minimap.OnBrickUpdate(coord);
-                    if (health <= 0){
-                        GameManager.Inst.grid.bricks[Coord.X,Coord.Y,Coord.Z] = null;
-                        Destroy(gameObject);
-                    }
                     foreach (var t in texts)
                         t.text = health.ToString();
                 }
@@ -58,8 +58,7 @@ namespace SBR
         {
             if(isBrick) return;
             GameManager.Inst.MaxBallCount++;
-            GameManager.Inst.grid.bricks[Coord.X,Coord.Y,Coord.Z] = null;
-            Destroy(gameObject);
+            Health = 0;
         }
     }
 }

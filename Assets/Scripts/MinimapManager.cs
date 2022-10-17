@@ -23,6 +23,7 @@ namespace SBR
         {
             foreach(var m in minimaps)
                 m.Init();
+            CurrentY = 0;
         }
         public void NewBall(Transform t)
         {
