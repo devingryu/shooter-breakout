@@ -79,6 +79,8 @@ namespace SBR
             var gridbrick = grid.bricks[pos.X,pos.Y,pos.Z];
             if(gridbrick != null) 
                 bricks[pos.X,pos.Z].Health = gridbrick.Health;
+            else
+                bricks[pos.X, pos.Z].Health = 0;
         }
         public void updateBricks()
         {
