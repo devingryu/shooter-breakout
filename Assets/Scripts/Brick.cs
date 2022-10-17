@@ -9,7 +9,7 @@ namespace SBR
     {
         private MinimapManager minimap;
         public TextMeshProUGUI[] texts;
-        public readonly bool isBrick;
+        public bool isBrick;
         private int health;
         public int Health
         {
