@@ -15,7 +15,7 @@ namespace SBR
         // 기준 벽돌 좌표, 위치
         private XYZ StdBrickCoord;
         private Vector3 StdBrickPos;
-        private int currentY = 0;
+        private int currentY = 1;
         public int CurrentY {
             get => currentY;
             set {

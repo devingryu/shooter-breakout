@@ -13,7 +13,7 @@ namespace SBR
         [SerializeField]
         private Transform boundaries;
         // X, Y, Z
-        public readonly int[] gridCount = new int[3] { 5, 1, 10 };// x: 왼쪽에서 오른쪽, y: 아래에서 위, z: 앞에서 뒤
+        public readonly int[] gridCount = new int[3] { 5, 2, 10 };// x: 왼쪽에서 오른쪽, y: 아래에서 위, z: 앞에서 뒤
         [SerializeField]
         private float gridCenterX = 0f;
         [SerializeField]

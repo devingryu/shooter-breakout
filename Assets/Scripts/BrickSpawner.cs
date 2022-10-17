@@ -76,5 +76,10 @@ namespace SBR
             MoveObjects();
             SpawnLine();
         }
+        [ContextMenu("Line add")]
+        private void AddLine()
+        {
+            NextRound();
+        }
     }
 }

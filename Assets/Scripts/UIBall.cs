@@ -13,7 +13,7 @@ namespace SBR
         private Minimap attachedMinimap;
         private bool isInit = false;
         private Vector3 brickBound;
-        public int currentY = 0;
+        public int currentY = 1;
         private void Awake() 
         {
             ren = GetComponent<SpriteRenderer>();
@@ -43,7 +43,7 @@ namespace SBR
                 if(!isInit) return;
                 if (pair != null)
                 {
-                    if((pair.position[1]/brickBound[1]-1) != currentY) {
+                    if(((int)(pair.position[1]/brickBound[1])) != currentY) {
                         ren.enabled = false;
                         return;
                     }
