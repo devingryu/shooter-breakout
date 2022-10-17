@@ -8,6 +8,17 @@ namespace SBR
     {
         [SerializeField]
         private Minimap[] minimaps;
+        private int currentY = 0;
+        public int CurrentY {
+            get => currentY;
+            set {
+                currentY = value;
+                foreach(var m in minimaps)
+                {
+                    m.CurrentY = value;
+                }
+            }
+        }
         public void Init()
         {
             foreach(var m in minimaps)

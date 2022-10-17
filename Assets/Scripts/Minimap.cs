@@ -15,7 +15,14 @@ namespace SBR
         // 기준 벽돌 좌표, 위치
         private XYZ StdBrickCoord;
         private Vector3 StdBrickPos;
-        public int currentY = 0;
+        private int currentY = 0;
+        public int CurrentY {
+            get => currentY;
+            set {
+                currentY = value;
+                UpdateCurrentY();
+            }
+        }
         public UIBrick[,] bricks;
         private int[] gridCount;
         [SerializeField]
@@ -81,6 +88,13 @@ namespace SBR
         }
         public UIBall newBall()
             => Instantiate(uiBallPrefab, Vector3.zero, transform.rotation, ballParent).GetComponent<UIBall>();
-        
+        private void UpdateCurrentY()
+        {
+            var children = ballParent.GetComponentsInChildren<UIBall>();
+            foreach(UIBall child in children)
+            {
+                child.currentY = currentY;
+            }
+        }
     }
 }

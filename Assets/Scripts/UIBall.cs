@@ -12,6 +12,8 @@ namespace SBR
         private SpriteRenderer ren;
         private Minimap attachedMinimap;
         private bool isInit = false;
+        private Vector3 brickBound;
+        public int currentY = 0;
         private void Awake() 
         {
             ren = GetComponent<SpriteRenderer>();
@@ -20,7 +22,9 @@ namespace SBR
         {
             GameManager m = GameManager.Inst;
             attachedMinimap = transform.parent.parent.GetComponent<Minimap>();
+            currentY = attachedMinimap.CurrentY;
             gridBound = (Vector3[])m.grid.gridBound.Clone();
+            brickBound = m.grid.brickBound;
             gridBound[0] -= (m.grid.brickBound/2); gridBound[1] += (m.grid.brickBound/2);
             
             Vector3 whtg = m.grid.gridBound[1]-m.grid.gridBound[0]+m.grid.brickBound;
@@ -39,6 +43,10 @@ namespace SBR
                 if(!isInit) return;
                 if (pair != null)
                 {
+                    if((pair.position[1]/brickBound[1]-1) != currentY) {
+                        ren.enabled = false;
+                        return;
+                    }
                     for(int i=0;i<3;i++)
                         if(!(gridBound[0][i] < pair.position[i] && pair.position[i] < gridBound[1][i])) {
                             ren.enabled = false;
