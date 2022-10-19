@@ -15,11 +15,12 @@ namespace SBR
         public SteamVR_Input_Sources inputSource;
         private float timer = 0f;
         private float timerTarget = 0.2f;
-        private bool shootEnabled = false;
+        public bool shootEnabled = false;
         [SerializeField]
         private Transform shootingPoint;
         [SerializeField]
         private GameObject bullet;
+        /* TODO: Should be deleted after migration to ControllerHandler.cs */
         /*
         private void HandHoverUpdate(Hand hand)
         {
@@ -42,8 +43,8 @@ namespace SBR
         void Start()
         {
             interactable = GetComponent<Interactable>();
-            StartCoroutine(AttachOnReady(HoldingHand, interactable, gameObject));
-            Trigger.AddOnChangeListener(OnTriggerStateChange, inputSource);
+            //StartCoroutine(AttachOnReady(HoldingHand, interactable, gameObject));
+            //Trigger.AddOnChangeListener(OnTriggerStateChange, inputSource);
         }
         void Update()
         {

@@ -7,6 +7,9 @@ TagManager:
   - Wall
   - Brick
   - Bullet
+  - projectile
+  - FxTemporaire
+  - Gun
   layers:
   - Default
   - TransparentFX
