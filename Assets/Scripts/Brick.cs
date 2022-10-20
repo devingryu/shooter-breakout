@@ -17,15 +17,16 @@ namespace SBR
             set
             {
                 health = value;
-                if(coord != null)
+                if(coord != null) {
                     minimap.OnBrickUpdate(coord);
-                if (health <= 0){
-                    GameManager.Inst.grid.bricks[Coord.X,Coord.Y,Coord.Z] = null;
-                    Destroy(gameObject);
-                }
-                if(isBrick) {
-                    foreach (var t in texts)
-                        t.text = health.ToString();
+                    if (health <= 0){
+                        GameManager.Inst.grid.bricks[coord.X,coord.Y,coord.Z] = null;
+                        Destroy(gameObject);
+                    }
+                    if(isBrick) {
+                        foreach (var t in texts)
+                            t.text = health.ToString();
+                    }
                 }
             }
         }
@@ -38,20 +39,17 @@ namespace SBR
                 transform.position = GameManager.Inst.grid.getPosFromCoord(value);
             }
         }
-        public void Start()
-        {
-            minimap = GameManager.Inst.minimap;
-        }
 
         public void Init(int health, XYZ coord) 
         {
+            minimap = GameManager.Inst.minimap;
             GameManager.Inst.grid.bricks[coord.X,coord.Y,coord.Z] = this;
-            Health = health;
             Coord = coord;
+            Health = health;
         }
         private void OnCollisionEnter(Collision other)
         {
-            if(!isBrick) return;
+            if(!isBrick && other.gameObject.tag != "Bullet") return;
             Health--;
         }
         private void OnTriggerEnter(Collider other) 

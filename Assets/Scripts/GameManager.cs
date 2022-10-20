@@ -13,6 +13,16 @@ namespace SBR
         [HideInInspector]
         public MinimapManager minimap;
         private int maxBallCount = 1;
+        public int remainingBallCount {get;set;} = 1;
+        private int returnedBallCount = 0;
+        public int ReturnedBallCount {
+            get => returnedBallCount;
+            set {
+                returnedBallCount = value;
+                if(value <= 0)
+                    Round++;
+            }
+        }
         public int MaxBallCount {
             get => maxBallCount;
             set {
@@ -20,13 +30,19 @@ namespace SBR
             }
         }
 
-        private int round = 0;
+        private int round = 1;
         public int Round
         {
             get => round;
             set
             {
-                round = value;
+                if(value > round) {
+                    round = value;
+                    remainingBallCount = MaxBallCount;
+                    returnedBallCount = MaxBallCount;
+                    spawner.NextRound();
+                } else // Unexpected on normal play
+                    round = value;
             }
         }
         private void Awake() 

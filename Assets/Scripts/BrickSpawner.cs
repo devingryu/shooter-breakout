@@ -27,7 +27,7 @@ namespace SBR
         }
         public void SpawnLine()
         {
-            int round = ++gm.Round;
+            int round = gm.Round;
             int max = gm.grid.gridCount[0] * gm.grid.gridCount[1];
             int numberOfBricks = Random.Range(1, max);
             List<int> bricks = new List<int>();

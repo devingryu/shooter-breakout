@@ -16,7 +16,7 @@ public class ReflectingLaser : MonoBehaviour
 
     private void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
-        layermask = ~(1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("BulletGrave") | 1 << LayerMask.NameToLayer("Hand"));
+        layermask = ~(1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("BulletGrave") | 1 << LayerMask.NameToLayer("Hand") | 1 << LayerMask.NameToLayer("Item"));
     }
     // Update is called once per frame
     void Update()
@@ -29,7 +29,6 @@ public class ReflectingLaser : MonoBehaviour
         
         for (int i=0; i< Reflections; i++)
         {
-            
             if(Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength,layermask))
             {
                 lineRenderer.positionCount += 1;

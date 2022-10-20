@@ -8,9 +8,9 @@ namespace SBR
 {
     public class Gun : MonoBehaviour
     {
-        
         public Hand HoldingHand;
         private Interactable interactable;
+        private GameManager gm;
         public SteamVR_Action_Boolean Trigger;
         public SteamVR_Input_Sources inputSource;
         private float timer = 0f;
@@ -20,29 +20,10 @@ namespace SBR
         private Transform shootingPoint;
         [SerializeField]
         private GameObject bullet;
-        /* TODO: Should be deleted after migration to ControllerHandler.cs */
-        /*
-        private void HandHoverUpdate(Hand hand)
-        {
-            interactable = GetComponent<Interactable>();
-            GrabTypes startingGrabType = hand.GetGrabStarting();
-            bool isGrabEnding = hand.IsGrabEnding(gameObject);
-
-            if(interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
-            {
-                hand.HoverLock(interactable);
-                hand.AttachObject(gameObject,startingGrabType, attachmentFlags);
-            } 
-            else if (isGrabEnding)
-            {
-                hand.DetachObject(gameObject);
-                hand.HoverUnlock(interactable);
-            }
-        }
-        */
         void Start()
         {
             interactable = GetComponent<Interactable>();
+            gm = GameManager.Inst;
             //StartCoroutine(AttachOnReady(HoldingHand, interactable, gameObject));
             //Trigger.AddOnChangeListener(OnTriggerStateChange, inputSource);
         }
@@ -52,9 +33,9 @@ namespace SBR
             if(timer >= timerTarget) 
             {
                 timer = timerTarget;
-                if(shootEnabled){
-                    //Debug.Log("Shoot!");
+                if(shootEnabled && gm.remainingBallCount > 0){
                     Instantiate(bullet,shootingPoint.position,shootingPoint.rotation);
+                    gm.remainingBallCount--;
                     timer = 0f;
                 }
             }
