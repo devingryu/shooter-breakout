@@ -13,6 +13,7 @@ public class ReflectingLaser : MonoBehaviour
     private RaycastHit hit;
     private Vector3 direction;
     private int layermask;
+    private float colliderRadius = 0.5f * 0.04f;
 
     private void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
@@ -29,7 +30,7 @@ public class ReflectingLaser : MonoBehaviour
         
         for (int i=0; i< Reflections; i++)
         {
-            if(Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength,layermask))
+            if(Physics.SphereCast(ray.origin, colliderRadius, ray.direction, out hit, remainingLength, layermask))
             {
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
