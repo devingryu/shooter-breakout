@@ -10,10 +10,18 @@ namespace SBR
         protected GameManager() { }
         public BrickSpawner spawner;
         public Grid grid;
+        public ControllerHandler ch;
         [HideInInspector]
         public MinimapManager minimap;
         private int maxBallCount = 1;
-        public int remainingBallCount {get;set;} = 1;
+        private int remainingBallCount = 1;
+        public int RemainingBallCount {
+            get => remainingBallCount;
+            set {
+                remainingBallCount = value;
+                ch.OnUpdateBulletCount(remainingBallCount,maxBallCount);
+            }
+        }
         private int returnedBallCount = 0;
         public int ReturnedBallCount {
             get => returnedBallCount;
@@ -27,6 +35,7 @@ namespace SBR
             get => maxBallCount;
             set {
                 maxBallCount = value;
+                ch.OnUpdateBulletCount(remainingBallCount,maxBallCount);
             }
         }
 
@@ -40,6 +49,7 @@ namespace SBR
                     round = value;
                     remainingBallCount = MaxBallCount;
                     returnedBallCount = MaxBallCount;
+                    ch.OnUpdateBulletCount(remainingBallCount,maxBallCount);
                     spawner.NextRound();
                 } else // Unexpected on normal play
                     round = value;
@@ -48,6 +58,7 @@ namespace SBR
         private void Awake() 
         {
             minimap = GetComponent<MinimapManager>();
+            ch = GetComponent<ControllerHandler>();
         }
     }
 }

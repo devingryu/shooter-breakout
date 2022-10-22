@@ -8,6 +8,7 @@ namespace SBR
 {
     public class ControllerHandler : MonoBehaviour
     {
+        private GameManager gm;
         private int gunState = -1; // -1: Unattached, 0: LEFT, 1: RIGHT
         private Gun attachedGun = null;
         [SerializeField]
@@ -19,7 +20,7 @@ namespace SBR
         // Start is called before the first frame update
         void Start()
         {
-            
+            gm = GameManager.Inst;
         }
 
         // Update is called once per frame
@@ -39,6 +40,7 @@ namespace SBR
                     {
                         gunState = i;
                         attachedGun = obj.attachedObject.GetComponent<Gun>();
+                        OnUpdateBulletCount(gm.RemainingBallCount,gm.MaxBallCount);
                         trigger.AddOnChangeListener(OnTriggerStateChange,inputSources[i]);
                         return;
                     }
@@ -52,6 +54,13 @@ namespace SBR
             if(attachedGun != null) 
             {
                 attachedGun.shootEnabled = newState;
+            }
+        }
+        public void OnUpdateBulletCount(int rm, int max)
+        {
+            if(attachedGun != null)
+            {
+                attachedGun.UpdateBulletIndicator(rm,max);
             }
         }
     }
