@@ -50,6 +50,15 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/UpperButton",
+      "type": "boolean",
+      "requirement": "suggested"
+    },
+    {
+      "name": "/actions/default/in/LowerButton",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },

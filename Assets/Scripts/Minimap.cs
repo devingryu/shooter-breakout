@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 namespace SBR
 {
     public class Minimap : MonoBehaviour
     {
         [SerializeField]
         private Transform ballParent;
+        [SerializeField]
+        private TextMeshPro floorText;
         [SerializeField]
         private float gridCenterX = 0f;
         [SerializeField]
@@ -20,6 +22,7 @@ namespace SBR
             get => currentY;
             set {
                 currentY = value;
+                floorText.text = $"{value+1}F";
                 UpdateCurrentY();
             }
         }
@@ -63,6 +66,8 @@ namespace SBR
             bg.transform.localPosition = new Vector3(gridCenterX+grdbndsum.x, gridStartZ+grdbndsum.z, 0f);
             bg.transform.localScale = new Vector3(grdbndmns.x*2f,grdbndmns.z*2f,1f);
 
+            ((RectTransform)floorText.transform).anchoredPosition3D = new Vector3(grdbndsum[0],gridBound[1][2]+brickBound[2],0f);
+
             //Debug.Log("Init Complete");
         }
         public Vector3 getPosFromCoord(XYZ coord)
@@ -98,6 +103,7 @@ namespace SBR
             {
                 child.currentY = currentY;
             }
+            updateBricks();
         }
     }
 }

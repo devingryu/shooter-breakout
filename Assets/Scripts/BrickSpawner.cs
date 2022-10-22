@@ -16,7 +16,7 @@ namespace SBR
         void Start()
         {
             gm = GameManager.Inst;
-            gm.minimap.Init();
+            gm.minimap.Init(gm.grid.gridCount[1]);
             SpawnLine();
         }
 

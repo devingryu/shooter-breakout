@@ -15,6 +15,10 @@ namespace SBR
         private Hand[] hands; // LEFT, RIGHT
         [SerializeField]
         private SteamVR_Action_Boolean trigger;
+        [SerializeField]
+        private SteamVR_Action_Boolean Upperbutton;
+        [SerializeField]
+        private SteamVR_Action_Boolean Lowerbutton;
         private SteamVR_Input_Sources[] inputSources 
             = {SteamVR_Input_Sources.LeftHand, SteamVR_Input_Sources.RightHand};
         // Start is called before the first frame update
@@ -42,6 +46,8 @@ namespace SBR
                         attachedGun = obj.attachedObject.GetComponent<Gun>();
                         OnUpdateBulletCount(gm.RemainingBallCount,gm.MaxBallCount);
                         trigger.AddOnChangeListener(OnTriggerStateChange,inputSources[i]);
+                        Upperbutton.AddOnChangeListener(OnMinimapUpButtonClick,inputSources[1-i]);
+                        Lowerbutton.AddOnChangeListener(OnMinimapDownButtonClick,inputSources[1-i]);
                         return;
                     }
                 }
@@ -55,6 +61,16 @@ namespace SBR
             {
                 attachedGun.shootEnabled = newState;
             }
+        }
+        private void OnMinimapUpButtonClick(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, System.Boolean newState)
+        {
+            if(newState)
+                gm.minimap.CurrentY++;
+        }
+        private void OnMinimapDownButtonClick(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, System.Boolean newState)
+        {
+            if(newState)
+                gm.minimap.CurrentY--;
         }
         public void OnUpdateBulletCount(int rm, int max)
         {
