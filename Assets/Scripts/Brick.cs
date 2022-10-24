@@ -47,16 +47,23 @@ namespace SBR
             Coord = coord;
             Health = health;
         }
+        public void OnBulletHit()
+        {
+            if(isBrick) 
+                Health--;
+            else
+            {
+                GameManager.Inst.MaxBallCount++;
+                Health = 0;
+            }
+        }
         private void OnCollisionEnter(Collision other)
         {
-            if(!isBrick && other.gameObject.tag != "Bullet") return;
-            Health--;
+            OnBulletHit();
         }
         private void OnTriggerEnter(Collider other) 
         {
-            if(isBrick) return;
-            GameManager.Inst.MaxBallCount++;
-            Health = 0;
+            OnBulletHit();
         }
     }
 }

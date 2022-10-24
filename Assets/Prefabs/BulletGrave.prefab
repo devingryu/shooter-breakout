@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3334227758775100728}
   m_Layer: 9
   m_Name: BulletGrave
-  m_TagString: Untagged
+  m_TagString: BulletGrave
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

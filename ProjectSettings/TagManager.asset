@@ -10,6 +10,8 @@ TagManager:
   - projectile
   - FxTemporaire
   - Gun
+  - BulletGrave
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - BulletGrave
   - Hand
   - Item
-  - 
+  - Outerior
   - 
   - 
   - 

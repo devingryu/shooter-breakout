@@ -13,7 +13,7 @@ namespace SBR
         public int CurrentY {
             get => currentY;
             set {
-                if(!(0 <= value && value <= maxY)) return;
+                if(!(0 <= value && value < maxY)) return;
                 currentY = value;
                 foreach(var m in minimaps)
                     m.CurrentY = value;
