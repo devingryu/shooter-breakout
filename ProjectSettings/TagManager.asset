@@ -12,6 +12,7 @@ TagManager:
   - Gun
   - BulletGrave
   - Item
+  - Outerior
   layers:
   - Default
   - TransparentFX
