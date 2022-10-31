@@ -14,7 +14,7 @@ public class ReCalcCubeTexture : MonoBehaviour
 
     private void Update()
     {
-        Calculate();
+        //Calculate();
     }
 
     public void Calculate()

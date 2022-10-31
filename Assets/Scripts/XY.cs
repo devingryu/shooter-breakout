@@ -1,6 +1,7 @@
 using System;
 namespace SBR
 {
+    [Serializable]
     public class XYZ
     {
         public int X;

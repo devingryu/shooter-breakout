@@ -8,6 +8,7 @@ namespace SBR
     {
         private Rigidbody rb;
         private Vector3 direction;
+        public Vector3 Direction => direction;
         public float SpeedMultiplier => 10f;
         private int defaultMask;
         private int noBltGrvMsk;
@@ -72,8 +73,6 @@ namespace SBR
             hasCollision = Physics.SphereCast(ray.origin, colliderRadius, ray.direction, out hit, maxDistance, defaultMask);
             if(hasCollision && hit.collider.tag == "BulletGrave" && direction.z > 0)
                 hasCollision = Physics.SphereCast(ray.origin, colliderRadius, ray.direction, out hit, maxDistance, noBltGrvMsk);
-            if(hasCollision)
-                Debug.Log($"{hit.collider.tag}");
             en=true;
         }
 

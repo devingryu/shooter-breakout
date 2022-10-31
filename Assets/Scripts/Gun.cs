@@ -11,6 +11,7 @@ namespace SBR
     {
         private Interactable interactable;
         private GameManager gm;
+        private Transform bulletParent;
         public SteamVR_Action_Boolean Trigger;
         public SteamVR_Input_Sources inputSource;
         private float timer = 0f;
@@ -26,6 +27,7 @@ namespace SBR
         {
             interactable = GetComponent<Interactable>();
             gm = GameManager.Inst;
+            bulletParent = gm.BulletParent;
             //StartCoroutine(AttachOnReady(HoldingHand, interactable, gameObject));
             //Trigger.AddOnChangeListener(OnTriggerStateChange, inputSource);
         }
@@ -36,7 +38,7 @@ namespace SBR
             {
                 timer = timerTarget;
                 if(shootEnabled && gm.RemainingBallCount > 0){
-                    Instantiate(bullet,shootingPoint.position,shootingPoint.rotation);
+                    Instantiate(bullet,shootingPoint.position,shootingPoint.rotation,bulletParent);
                     gm.RemainingBallCount--;
                     timer = 0f;
                 }

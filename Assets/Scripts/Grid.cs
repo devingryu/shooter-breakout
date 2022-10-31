@@ -40,8 +40,9 @@ namespace SBR
         private Vector3[] realGridBound;
 
         public Brick[,,] bricks;
+        public bool en = false;
 
-        private void Awake()
+        public void Awake()
         {
             StdBrickCoord = new XYZ(((gridCount[0] % 2 == 0) ? (gridCount[0] - 2) : (gridCount[0] - 1)) / 2, 0, 0);
             StdBrickPos = new Vector3((gridCount[0] % 2 == 0) ? gridCenterX - (brickBound.x / 2) : gridCenterX, brickBound[1]/2f, gridStartZ);
@@ -55,6 +56,7 @@ namespace SBR
                         bricks[i,j,k] = null;
             PlaceWalls();
             PlaceOuterior();
+            en = true;
         }
 
         public Vector3 getPosFromCoord(XYZ coord)
@@ -116,6 +118,16 @@ namespace SBR
             //back
             Instantiate(outerior, new Vector3(pos.x, yvalue, zvalue-outeriorRoomscale-outeriorShape.y/2), Quaternion.Euler(-90f,0f,0f), outeriorParent).transform.localScale
                 = new Vector3(front.x, outeriorShape.y, front.y);
+        }
+        public BrickInfo[] SerializeBricks()
+        {
+            List<BrickInfo> b = new List<BrickInfo>();
+            for(int i=0;i<gridCount[0];i++)
+                for(int j=0;j<gridCount[1];j++)
+                    for(int k=0;k<gridCount[2];k++)
+                        if(bricks[i,j,k] != null)
+                            b.Add(new(bricks[i,j,k].Coord, bricks[i,j,k].Health));
+            return b.ToArray();
         }
     }
 }
