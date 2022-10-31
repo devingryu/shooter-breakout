@@ -24,6 +24,8 @@ namespace SBR
                 return null;
             }
         }
+        public void RemoveSaveFile() => File.Delete(filePath);
+        
         public void Save(SaveStructure data) => StartCoroutine(SaveSync(data));
         
         private IEnumerator SaveSync(SaveStructure data)

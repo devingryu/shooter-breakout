@@ -17,7 +17,6 @@ namespace SBR
         {
             gm = GameManager.Inst;
             gm.minimap.Init(gm.grid.gridCount[1]);
-            SpawnLine();
         }
 
         // Update is called once per frame
@@ -28,7 +27,8 @@ namespace SBR
         public void SpawnLine()
         {
             int round = gm.Round;
-            int max = gm.grid.gridCount[0] * gm.grid.gridCount[1];
+            Grid grid = gm.grid;
+            int max = grid.gridCount[0] * grid.gridCount[1];
             int numberOfBricks = Random.Range(1, max);
             List<int> bricks = new List<int>();
             int currentBrick = Random.Range(0, max);
@@ -42,19 +42,15 @@ namespace SBR
                 }
             }            
             foreach(var b in bricks){
-                XYZ xyz = new XYZ(b % gm.grid.gridCount[0], b / gm.grid.gridCount[0], gm.grid.gridCount[2]-1);
-                var newBrick = Instantiate(brick, brickParent);
-                newBrick.GetComponent<Brick>().Init(round, xyz);;
-                gm.minimap.OnBrickUpdate(xyz);
+                XYZ xyz = new XYZ(b % grid.gridCount[0], b / grid.gridCount[0], grid.gridCount[2]-1);
+                ManualBrickAdd(xyz, round);
             }
 
             currentBrick = Random.Range(0, max);
             while (bricks.Contains(currentBrick))
                 currentBrick = Random.Range(0, max);
-            XYZ itemxyz = new XYZ(currentBrick % gm.grid.gridCount[0], currentBrick / gm.grid.gridCount[0], gm.grid.gridCount[2] - 1);
-            var newItem = Instantiate(item, brickParent);
-            newItem.GetComponent<Brick>().Init(round, itemxyz); ;
-            gm.minimap.OnBrickUpdate(itemxyz);
+            XYZ itemxyz = new XYZ(currentBrick % grid.gridCount[0], currentBrick / grid.gridCount[0], grid.gridCount[2] - 1);
+            ManualBrickAdd(itemxyz, round);
         }
         
         public void MoveObjects()
@@ -67,6 +63,8 @@ namespace SBR
                 if (gb.Coord.Z == 0)
                 {
                     Debug.Log("Game Over");
+                    gm.running = false;
+                    DataHandler.Inst.RemoveSaveFile();
                     return;
                 }
                 gridBricks.Add(gb);
@@ -85,6 +83,12 @@ namespace SBR
         {
             MoveObjects();
             SpawnLine();
+        }
+        public void ManualBrickAdd(XYZ pos, int health)
+        {
+            var newBrick = Instantiate(brick, brickParent);
+            newBrick.GetComponent<Brick>().Init(health, pos);
+            gm.minimap.OnBrickUpdate(pos);
         }
         [ContextMenu("Line add")]
         private void AddLine()
