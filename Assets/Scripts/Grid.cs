@@ -18,7 +18,7 @@ namespace SBR
         [SerializeField]
         private Transform outeriorParent;
         private Vector3 outeriorShape = new(1f,0.05f,1f);
-        private float[] outeriorMargin = {3f, 1f, 1f, 1f}; // top, right, bottom, left
+        private float[] outeriorMargin = {3f, 1f, 0.7f, 1f}; // top, right, bottom, left
         private float outeriorRoomscale = 10;
         // X, Y, Z
         public readonly int[] gridCount = new int[3] { 5, 2, 10 };// x: 왼쪽에서 오른쪽, y: 아래에서 위, z: 앞에서 뒤
@@ -88,14 +88,14 @@ namespace SBR
             var zvalue = realGridBound[0].z+outeriorShape.y/2;
             var quater = Quaternion.Euler(-90f,0f,0f);
 
-            Instantiate(outerior, new Vector3(pos.x, realGridBound[1].y+outeriorMargin[0]/2f,zvalue), quater,outeriorParent).transform.localScale 
-                = new Vector3(front.x, outeriorShape.y,outeriorMargin[0]); //top
-            Instantiate(outerior, new Vector3(pos.x, realGridBound[0].y-outeriorMargin[2]/2f,zvalue), quater,outeriorParent).transform.localScale
-                = new Vector3(front.x, outeriorShape.y,outeriorMargin[2]); //bot
-            Instantiate(outerior, new Vector3(realGridBound[1].x+outeriorMargin[1]/2f, pos.y, zvalue), quater, outeriorParent).transform.localScale
-                = new Vector3(outeriorMargin[1],outeriorShape.y,wht.y); //right
-            Instantiate(outerior, new Vector3(realGridBound[0].x-outeriorMargin[3]/2f, pos.y, zvalue), quater, outeriorParent).transform.localScale
-                = new Vector3(outeriorMargin[3],outeriorShape.y,wht.y); //left
+            Instantiate(outerior, new Vector3(pos.x, realGridBound[1].y+outeriorMargin[0]/2f+0.025f,zvalue), quater,outeriorParent).transform.localScale 
+                = new Vector3(front.x, outeriorShape.y,outeriorMargin[0]-0.05f); //top
+            Instantiate(outerior, new Vector3(pos.x, realGridBound[0].y-outeriorMargin[2]/2f-0.025f,zvalue), quater,outeriorParent).transform.localScale
+                = new Vector3(front.x, outeriorShape.y,outeriorMargin[2]-0.05f); //bot
+            Instantiate(outerior, new Vector3(realGridBound[1].x+outeriorMargin[1]/2f+0.025f, pos.y, zvalue), quater, outeriorParent).transform.localScale
+                = new Vector3(outeriorMargin[1]-0.05f,outeriorShape.y,wht.y); //right
+            Instantiate(outerior, new Vector3(realGridBound[0].x-outeriorMargin[3]/2f-0.025f, pos.y, zvalue), quater, outeriorParent).transform.localScale
+                = new Vector3(outeriorMargin[3]-0.05f,outeriorShape.y,wht.y); //left
             
             //LR
             quater = Quaternion.Euler(-90f,-90f,0f);
