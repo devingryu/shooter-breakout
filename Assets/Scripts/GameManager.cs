@@ -8,7 +8,9 @@ namespace SBR
     public class GameManager : Singleton<GameManager>
     {
         protected GameManager() { }
+        [HideInInspector]
         public BrickSpawner spawner;
+        [HideInInspector]
         public Grid grid;
         public ControllerHandler ch;
         [HideInInspector]
@@ -57,6 +59,8 @@ namespace SBR
         }
         private void Awake() 
         {
+            spawner = GetComponent<BrickSpawner>();
+            grid = GetComponent<Grid>();
             minimap = GetComponent<MinimapManager>();
             ch = GetComponent<ControllerHandler>();
         }
