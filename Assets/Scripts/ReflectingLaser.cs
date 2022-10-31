@@ -12,12 +12,14 @@ public class ReflectingLaser : MonoBehaviour
     private Ray ray;
     private RaycastHit hit;
     private Vector3 direction;
-    private int layermask;
+    private int layerMask;
+    private int subLayerMask;
     private float colliderRadius = 0.5f * 0.04f;
 
     private void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
-        layermask = ~(1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("BulletGrave") | 1 << LayerMask.NameToLayer("Hand") | 1 << LayerMask.NameToLayer("Item"));
+        layerMask = ~(1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("Hand") | 1 << LayerMask.NameToLayer("Item"));
+        subLayerMask = layerMask & ~(1 << LayerMask.NameToLayer("BulletGrave"));
     }
     // Update is called once per frame
     void Update()
@@ -30,8 +32,10 @@ public class ReflectingLaser : MonoBehaviour
         
         for (int i=0; i< Reflections; i++)
         {
-            if(Physics.SphereCast(ray.origin, colliderRadius, ray.direction, out hit, remainingLength, layermask))
+            if(Physics.SphereCast(ray.origin, colliderRadius, ray.direction, out hit, remainingLength, layerMask))
             {
+                if(ray.direction.z > 0 && hit.transform.tag == "BulletGrave")
+                    Physics.SphereCast(ray.origin, colliderRadius, ray.direction, out hit, remainingLength, subLayerMask);
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 remainingLength -= Vector3.Distance(ray.origin, hit.point);

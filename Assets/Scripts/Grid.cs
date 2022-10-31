@@ -73,8 +73,8 @@ namespace SBR
             Instantiate(wall, new Vector3(pos.x,gridBound[1].y+(brickBound.y+0.05f)/2, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(wht.x,0.05f,wht.z);
 
             //XWall
-            Instantiate(wall, new Vector3(gridBound[0].x-(brickBound.x+0.05f)/2,pos.y, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(0.05f,wht.y,wht.z);
-            Instantiate(wall, new Vector3(gridBound[1].x+(brickBound.x+0.05f)/2,pos.y, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(0.05f,wht.y,wht.z);
+            Instantiate(wall, new Vector3(gridBound[0].x-(brickBound.x+0.05f)/2,pos.y, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(0.05f,wht.y+0.1f,wht.z);
+            Instantiate(wall, new Vector3(gridBound[1].x+(brickBound.x+0.05f)/2,pos.y, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(0.05f,wht.y+0.1f,wht.z);
 
             //ZWall
             Instantiate(bulletGrave, new Vector3(pos.x, pos.y, gridBound[0].z-(brickBound.z+0.05f)/2),Quaternion.identity, boundaries).transform.localScale = new Vector3(wht.x,wht.y,0.05f);
@@ -93,9 +93,9 @@ namespace SBR
             Instantiate(outerior, new Vector3(pos.x, realGridBound[0].y-outeriorMargin[2]/2f-0.025f,zvalue), quater,outeriorParent).transform.localScale
                 = new Vector3(front.x, outeriorShape.y,outeriorMargin[2]-0.05f); //bot
             Instantiate(outerior, new Vector3(realGridBound[1].x+outeriorMargin[1]/2f+0.025f, pos.y, zvalue), quater, outeriorParent).transform.localScale
-                = new Vector3(outeriorMargin[1]-0.05f,outeriorShape.y,wht.y); //right
+                = new Vector3(outeriorMargin[1]-0.05f,outeriorShape.y,wht.y+0.1f); //right
             Instantiate(outerior, new Vector3(realGridBound[0].x-outeriorMargin[3]/2f-0.025f, pos.y, zvalue), quater, outeriorParent).transform.localScale
-                = new Vector3(outeriorMargin[3]-0.05f,outeriorShape.y,wht.y); //left
+                = new Vector3(outeriorMargin[3]-0.05f,outeriorShape.y,wht.y+0.1f); //left
             
             //LR
             quater = Quaternion.Euler(-90f,-90f,0f);
