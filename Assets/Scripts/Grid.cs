@@ -126,7 +126,7 @@ namespace SBR
                 for(int j=0;j<gridCount[1];j++)
                     for(int k=0;k<gridCount[2];k++)
                         if(bricks[i,j,k] != null)
-                            b.Add(new(bricks[i,j,k].Coord, bricks[i,j,k].Health));
+                            b.Add(new(bricks[i,j,k].Coord, bricks[i,j,k].Health, bricks[i,j,k].isBrick));
             return b.ToArray();
         }
     }

@@ -26,13 +26,15 @@ namespace SBR
     [Serializable]
     public class BrickInfo
     {
-        public BrickInfo(XYZ pos, int health)
+        public BrickInfo(XYZ pos, int health, bool isBrick)
         {
             this.pos = pos;
             this.health = health;
+            this.isBrick = isBrick;
         }
         public XYZ pos;
         public int health;
+        public bool isBrick;
     }
     [Serializable]
     public class BulletInfo

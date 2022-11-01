@@ -50,7 +50,7 @@ namespace SBR
             while (bricks.Contains(currentBrick))
                 currentBrick = Random.Range(0, max);
             XYZ itemxyz = new XYZ(currentBrick % grid.gridCount[0], currentBrick / grid.gridCount[0], grid.gridCount[2] - 1);
-            ManualBrickAdd(itemxyz, round);
+            ManualItemAdd(itemxyz, round);
         }
         
         public void MoveObjects()
@@ -87,6 +87,12 @@ namespace SBR
         public void ManualBrickAdd(XYZ pos, int health)
         {
             var newBrick = Instantiate(brick, brickParent);
+            newBrick.GetComponent<Brick>().Init(health, pos);
+            gm.minimap.OnBrickUpdate(pos);
+        }
+        public void ManualItemAdd(XYZ pos, int health)
+        {
+            var newBrick = Instantiate(item, brickParent);
             newBrick.GetComponent<Brick>().Init(health, pos);
             gm.minimap.OnBrickUpdate(pos);
         }

@@ -119,7 +119,12 @@ namespace SBR
                 Debug.Log("Savefile Corrupted!");
             ReturnedBallCount = RemainingBallCount + saveFile.balls.Length;
             foreach (var b in saveFile.bricks)
-                spawner.ManualBrickAdd(b.pos, b.health);
+            {
+                if(b.isBrick)
+                    spawner.ManualBrickAdd(b.pos, b.health);
+                else
+                    spawner.ManualItemAdd(b.pos, b.health);
+            }
             foreach (var b in saveFile.balls)
                 CreateBullet(b.pos.ToVector3(), Quaternion.Euler(b.pos.ToVector3()));
         }
