@@ -66,5 +66,13 @@ namespace SBR
         public int remainingBallCount;
         public int returnedBallCount;
     }
-
+    [Serializable]
+    public class HighScoreInfo
+    {
+        public HighScoreInfo(int highScore)
+        {
+            this.highScore = highScore;
+        }
+        public int highScore;
+    }
 }

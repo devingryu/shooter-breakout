@@ -11,7 +11,6 @@ namespace SBR
         protected DataHandler() {}
         private string saveFileName = "savedata.json";
         public string filePath => Path.Join(Application.persistentDataPath, saveFileName);
-        
         public SaveStructure Load()
         {
             string path = filePath;
@@ -36,6 +35,42 @@ namespace SBR
 
                 File.WriteAllText(filePath, json);
             } catch (Exception e){
+                Debug.LogError(e.StackTrace);
+            }
+        }
+
+        private string highScoreSaveFileName = "highscoredata.json";
+        public string highScoreFilePath => Path.Join(Application.persistentDataPath, highScoreSaveFileName);
+        public int LoadHighScore()
+        {
+            string path = highScoreFilePath;
+            if (!File.Exists(path)) return 1;
+
+            string FromJsonData = File.ReadAllText(highScoreFilePath);
+            try
+            {
+                return JsonUtility.FromJson<int>(FromJsonData);
+            }
+            catch
+            {
+                return 1;
+            }
+        }
+
+        public void SaveHighScore(int data) => StartCoroutine(SaveHighScoreSync(data));
+
+        private IEnumerator SaveHighScoreSync(int data)
+        {
+            yield return null;
+            try
+            {
+                HighScoreInfo h = new HighScoreInfo(data);
+                string json = JsonUtility.ToJson(data, true);
+
+                File.WriteAllText(highScoreFilePath, json);
+            }
+            catch (Exception e)
+            {
                 Debug.LogError(e.StackTrace);
             }
         }

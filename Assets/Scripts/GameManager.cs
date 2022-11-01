@@ -70,11 +70,28 @@ namespace SBR
                     returnedBallCount = MaxBallCount;
                     ch.OnUpdateBulletCount(remainingBallCount, maxBallCount);
                     spawner.NextRound();
+                    if (value > highScore)
+                    { 
+                        HighScore = value;
+                    }
                 }
                 else // Unexpected on normal play
                     round = value;
             }
         }
+
+        private int highScore = 1;
+        public int HighScore
+        {
+            get => highScore;
+            set
+            {
+                highScore = value;
+                dataHandler.SaveHighScore(value);
+            }
+        }
+
+
         private void Awake()
         {
             spawner = GetComponent<BrickSpawner>();
@@ -90,6 +107,8 @@ namespace SBR
                 LoadProgress(saveData);
             else
                 spawner.SpawnLine();
+
+            HighScore = dataHandler.LoadHighScore();
             running = true;
         }
         private void Update()
