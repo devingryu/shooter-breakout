@@ -160,8 +160,9 @@ namespace SBR
             MaxBallCount = 1;
             Round = 0;
             Round++;
-            running = false;
-            DataHandler.Inst.RemoveSaveFile();
+            running = true;
+            //running = false;
+            //DataHandler.Inst.RemoveSaveFile();
         }
     }
 }

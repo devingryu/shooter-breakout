@@ -116,8 +116,9 @@ namespace SBR
                 = new Vector3(front.x, outeriorShape.y, outeriorRoomscale);
             
             //back
-            Instantiate(outerior, new Vector3(pos.x, yvalue, zvalue-outeriorRoomscale-outeriorShape.y/2), Quaternion.Euler(-90f,0f,0f), outeriorParent).transform.localScale
-                = new Vector3(front.x, outeriorShape.y, front.y);
+            var back = Instantiate(outerior, new Vector3(pos.x, yvalue, zvalue-outeriorRoomscale-outeriorShape.y/2), Quaternion.Euler(-90f,0f,0f), outeriorParent);
+            back.transform.localScale = new Vector3(front.x, outeriorShape.y, front.y);
+            back.AddComponent<UIObject>();
         }
         public BrickInfo[] SerializeBricks()
         {

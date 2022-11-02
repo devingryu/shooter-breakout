@@ -23,16 +23,11 @@ namespace SBR
         private SteamVR_Action_Boolean Grab;
         private SteamVR_Input_Sources[] inputSources 
             = {SteamVR_Input_Sources.LeftHand, SteamVR_Input_Sources.RightHand};
-        // Start is called before the first frame update
+        private UIPointer[] pointers; // LEFT,RIGHT
         void Start()
         {
             gm = GameManager.Inst;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
+            pointers = new UIPointer[2] {hands[0].GetComponent<UIPointer>(),hands[1].GetComponent<UIPointer>()};
         }
         public void OnGunAttachStateChanged()
         {
@@ -62,7 +57,7 @@ namespace SBR
         }
         private void OnTriggerStateChange(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, System.Boolean newState)
         {
-            if(attachedGun != null) 
+            if(attachedGun != null && gunState!=-1 && pointers[gunState].Counter <= 0) 
             {
                 attachedGun.shootEnabled = newState;
             }
