@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 4942564803224778004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8478831961389677771}
@@ -234,7 +234,7 @@ RectTransform:
   m_GameObject: {fileID: 5531512363473157731}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.025}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3847156878547468363}
@@ -555,6 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6307353164829558180}
+  - component: {fileID: 3560092651965920884}
   m_Layer: 0
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -579,6 +580,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3560092651965920884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6742790393916154672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ddca73d829c6954182f8b7d082e3d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inner: {fileID: 4942564803224778004}
+  background: {fileID: 6551638463295463542}
+  text: {fileID: 2097578260196156998}
 --- !u!1 &7057550109312956566
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ namespace SBR
         [SerializeField]
         private GameObject bulletGrave;
         [SerializeField]
+        private GameObject GameOverMenu;
+        [SerializeField]
         private GameObject outerior;
         [SerializeField]
         private Transform boundaries;
@@ -41,6 +43,7 @@ namespace SBR
 
         public Brick[,,] bricks;
         public bool en = false;
+        private GameObject BulletGraveInst;
 
         public void Awake()
         {
@@ -56,6 +59,7 @@ namespace SBR
                         bricks[i,j,k] = null;
             PlaceWalls();
             PlaceOuterior();
+            ActivateGameOverMenu(false);
             en = true;
         }
 
@@ -79,7 +83,10 @@ namespace SBR
             Instantiate(wall, new Vector3(gridBound[1].x+(brickBound.x+0.05f)/2,pos.y, pos.z),Quaternion.identity, boundaries).transform.localScale = new Vector3(0.05f,wht.y+0.1f,wht.z);
 
             //ZWall
-            Instantiate(bulletGrave, new Vector3(pos.x, pos.y, gridBound[0].z-(brickBound.z+0.05f)/2),Quaternion.identity, boundaries).transform.localScale = new Vector3(wht.x,wht.y,0.05f);
+            BulletGraveInst = Instantiate(bulletGrave, new Vector3(pos.x, pos.y, gridBound[0].z-(brickBound.z+0.05f)/2),Quaternion.identity, boundaries);
+            BulletGraveInst.transform.localScale = new Vector3(wht.x,wht.y,0.05f);
+            GameOverMenu.transform.position = new Vector3(pos.x, pos.y, gridBound[0].z-(brickBound.z+0.05f)/2);
+            GameOverMenu.GetComponent<GameOverMenu>().Init(new Vector3(wht.x,wht.y,0.05f));
             Instantiate(wall, new Vector3(pos.x, pos.y, gridBound[1].z+(brickBound.z+0.05f)/2),Quaternion.identity, boundaries).transform.localScale = new Vector3(wht.x,wht.y,0.05f);
         }
         private void PlaceOuterior()
@@ -129,6 +136,13 @@ namespace SBR
                         if(bricks[i,j,k] != null)
                             b.Add(new(bricks[i,j,k].Coord, bricks[i,j,k].Health, bricks[i,j,k].isBrick));
             return b.ToArray();
+        }
+        public void ActivateGameOverMenu(bool active, int highScore = -1, int currentScore = -1)
+        {
+            GameOverMenu.SetActive(active);
+            BulletGraveInst.SetActive(!active);
+            if (active)
+                GameOverMenu.GetComponent<GameOverMenu>().SetScore((highScore,currentScore));
         }
     }
 }

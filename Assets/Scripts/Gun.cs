@@ -33,7 +33,7 @@ namespace SBR
             if(timer >= timerTarget) 
             {
                 timer = timerTarget;
-                if(shootEnabled && gm.RemainingBallCount > 0){
+                if(shootEnabled && gm.RemainingBallCount > 0 && gm.running){
                     gm.CreateBullet(shootingPoint.position, shootingPoint.rotation);
                     gm.RemainingBallCount--;
                     timer = 0f;

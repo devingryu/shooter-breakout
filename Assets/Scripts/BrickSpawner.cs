@@ -62,7 +62,8 @@ namespace SBR
                 if (gb.Coord.Z == 0)
                 {
                     Debug.Log("Game Over");
-                    gm.Reset();
+                    gm.OnGameOver();
+                    //gm.Reset();
                     return false;
                 }
                 gridBricks.Add(gb);

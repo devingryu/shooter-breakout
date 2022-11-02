@@ -150,6 +150,12 @@ namespace SBR
         public void CreateBullet(Vector3 pos, Quaternion direction)
             => Instantiate(bullet, pos, direction, BulletParent);
         
+        public void OnGameOver()
+        {
+            running = false;
+            DataHandler.Inst.RemoveSaveFile();
+            grid.ActivateGameOverMenu(true,HighScore,round-1);
+        }
         public void Reset()
         {
             foreach (var b in grid.bricks)
@@ -161,8 +167,7 @@ namespace SBR
             Round = 0;
             Round++;
             running = true;
-            //running = false;
-            //DataHandler.Inst.RemoveSaveFile();
+            grid.ActivateGameOverMenu(false);
         }
     }
 }
