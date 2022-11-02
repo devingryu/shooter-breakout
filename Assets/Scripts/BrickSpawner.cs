@@ -62,7 +62,7 @@ namespace SBR
                 if (gb.Coord.Z == 0)
                 {
                     Debug.Log("Game Over");
-                    Reset();
+                    gm.Reset();
                     return false;
                 }
                 gridBricks.Add(gb);
@@ -94,19 +94,6 @@ namespace SBR
             var newBrick = Instantiate(item, brickParent);
             newBrick.GetComponent<Brick>().Init(health, pos);
             gm.minimap.OnBrickUpdate(pos);
-        }
-        public void Reset()
-        {
-            foreach (var b in gm.grid.bricks)
-            {
-                if (b != null)
-                    b.Health = 0;
-            }
-            gm.MaxBallCount = 1;
-            gm.Round = 0;
-            gm.Round++;
-            gm.running = false;
-            DataHandler.Inst.RemoveSaveFile();
         }
         [ContextMenu("Line add")]
         private void AddLine()

@@ -149,5 +149,19 @@ namespace SBR
         }
         public void CreateBullet(Vector3 pos, Quaternion direction)
             => Instantiate(bullet, pos, direction, BulletParent);
+        
+        public void Reset()
+        {
+            foreach (var b in grid.bricks)
+            {
+                if (b != null)
+                    b.Health = 0;
+            }
+            MaxBallCount = 1;
+            Round = 0;
+            Round++;
+            running = false;
+            DataHandler.Inst.RemoveSaveFile();
+        }
     }
 }
