@@ -49,8 +49,11 @@ namespace SBR
         }
         public void OnBulletHit()
         {
-            if(isBrick) 
+            if(isBrick)
+            { 
                 Health--;
+                SoundManager.Inst.PlayEffect("BrickHit");
+            }
             else
             {
                 GameManager.Inst.MaxBallCount++;
