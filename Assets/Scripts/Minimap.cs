@@ -42,14 +42,10 @@ namespace SBR
         public readonly Vector3 brickBound = new(0.2f, 0f, 0.125f);
         public Vector3[] gridBound;
 
-
-        private void Start()
+        public void Init()
         {
             grid = GameManager.Inst.grid;
             gridCount = (int[])grid.gridCount.Clone();
-        }
-        public void Init()
-        {
             StdBrickCoord = new XYZ(((gridCount[0] % 2 == 0) ? (gridCount[0] - 2) : (gridCount[0] - 1)) / 2, 0, 0);
             StdBrickPos = new Vector3((gridCount[0] % 2 == 0) ? gridCenterX - (brickBound.x / 2) : gridCenterX, 0, gridStartZ);
             gridBound = new Vector3[2] { getPosFromCoord(new XYZ(0, 0, 0)), getPosFromCoord(new XYZ(gridCount[0] - 1, 0, gridCount[2] - 1)) };
