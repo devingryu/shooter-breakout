@@ -18,7 +18,7 @@ public class ReflectingLaser : MonoBehaviour
 
     private void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
-        layerMask = ~(1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("Hand") | 1 << LayerMask.NameToLayer("Item"));
+        layerMask = ~(1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("Hand") | 1 << LayerMask.NameToLayer("Item") | 1 << LayerMask.NameToLayer("BGCollision"));
         subLayerMask = layerMask & ~(1 << LayerMask.NameToLayer("BulletGrave"));
     }
     // Update is called once per frame

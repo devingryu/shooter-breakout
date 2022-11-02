@@ -19,6 +19,7 @@ namespace SBR
         private DataHandler dataHandler;
         [SerializeField]
         private GameObject bullet;
+        public RoundIndicator RoundIndicator;
         public Transform BulletParent;
 
         private int maxBallCount = 1;
@@ -63,6 +64,7 @@ namespace SBR
             get => round;
             set
             {
+                RoundIndicator.CurrentRound = value;
                 if (value > round)
                 {
                     round = value;
@@ -71,9 +73,7 @@ namespace SBR
                     ch.OnUpdateBulletCount(remainingBallCount, maxBallCount);
                     bool s = spawner.NextRound();
                     if (value > highScore && s)
-                    { 
                         HighScore = value;
-                    }
                 }
                 else // Unexpected on normal play
                     round = value;
@@ -88,6 +88,7 @@ namespace SBR
             {
                 highScore = value;
                 dataHandler.SaveHighScore(value);
+                RoundIndicator.MaxScore = value;
             }
         }
 
@@ -109,6 +110,7 @@ namespace SBR
                 spawner.SpawnLine();
 
             HighScore = dataHandler.LoadHighScore();
+            RoundIndicator.CurrentRound = round;
             running = true;
         }
         private void Update()
@@ -146,6 +148,7 @@ namespace SBR
             }
             foreach (var b in saveFile.balls)
                 CreateBullet(b.pos.ToVector3(), Quaternion.Euler(b.pos.ToVector3()));
+            
         }
         public void CreateBullet(Vector3 pos, Quaternion direction)
             => Instantiate(bullet, pos, direction, BulletParent);

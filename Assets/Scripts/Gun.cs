@@ -14,7 +14,7 @@ namespace SBR
         public SteamVR_Action_Boolean Trigger;
         public SteamVR_Input_Sources inputSource;
         private float timer = 0f;
-        private float timerTarget = 0.2f;
+        private float timerTarget = 0.15f;
         public bool shootEnabled = false;
         [SerializeField]
         private Transform shootingPoint;

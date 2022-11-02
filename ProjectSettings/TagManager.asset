@@ -13,6 +13,7 @@ TagManager:
   - BulletGrave
   - Item
   - Outerior
+  - UIObject
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Hand
   - Item
   - Outerior
-  - 
+  - BGCollision
   - 
   - 
   - 
