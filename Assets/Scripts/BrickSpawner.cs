@@ -22,7 +22,6 @@ namespace SBR
         // Update is called once per frame
         void Update()
         {
-
         }
         public void SpawnLine()
         {
@@ -53,7 +52,7 @@ namespace SBR
             ManualItemAdd(itemxyz, round);
         }
         
-        public void MoveObjects()
+        public bool MoveObjects()
         {
             List<Brick> gridBricks = new List<Brick>();
             foreach (var gb in gm.grid.bricks)
@@ -63,9 +62,8 @@ namespace SBR
                 if (gb.Coord.Z == 0)
                 {
                     Debug.Log("Game Over");
-                    gm.running = false;
-                    DataHandler.Inst.RemoveSaveFile();
-                    return;
+                    Reset();
+                    return false;
                 }
                 gridBricks.Add(gb);
             }
@@ -77,12 +75,13 @@ namespace SBR
                 gm.grid.bricks[b.Coord.X, b.Coord.Y, b.Coord.Z] = b;
                 gm.minimap.OnBrickUpdate(b.Coord);
             }
+            return true;
         }
 
         public void NextRound()
         {
-            MoveObjects();
-            SpawnLine();
+            if(MoveObjects())
+                SpawnLine();
         }
         public void ManualBrickAdd(XYZ pos, int health)
         {
@@ -96,10 +95,23 @@ namespace SBR
             newBrick.GetComponent<Brick>().Init(health, pos);
             gm.minimap.OnBrickUpdate(pos);
         }
+        public void Reset()
+        {
+            foreach (var b in gm.grid.bricks)
+            {
+                if (b != null)
+                    b.Health = 0;
+            }
+            gm.MaxBallCount = 1;
+            gm.Round = 0;
+            gm.Round++;
+            gm.running = false;
+            DataHandler.Inst.RemoveSaveFile();
+        }
         [ContextMenu("Line add")]
         private void AddLine()
         {
-            NextRound();
+            gm.Round++;
         }
     }
 }
