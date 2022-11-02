@@ -57,8 +57,12 @@ namespace SBR
         }
         private void OnTriggerStateChange(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, System.Boolean newState)
         {
-            if(attachedGun != null && gunState!=-1 && pointers[gunState].Counter <= 0) 
+            if(attachedGun != null ) 
             {
+                if(gunState!=-1 && pointers[gunState].Counter > 0) {
+                    attachedGun.shootEnabled = false;
+                    return;
+                }
                 attachedGun.shootEnabled = newState;
             }
         }
