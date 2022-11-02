@@ -56,6 +56,7 @@ namespace SBR
             }
             else
             {
+                SoundManager.Inst.PlayEffect("GetItem");
                 GameManager.Inst.MaxBallCount++;
                 Health = 0;
             }

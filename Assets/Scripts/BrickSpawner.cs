@@ -83,6 +83,7 @@ namespace SBR
             if(MoveObjects())
             { 
                 SpawnLine();
+                SoundManager.Inst.PlayEffect("NextRound");
                 return true;
             }
             else
