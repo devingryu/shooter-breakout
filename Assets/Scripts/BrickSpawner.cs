@@ -78,10 +78,15 @@ namespace SBR
             return true;
         }
 
-        public void NextRound()
+        public bool NextRound()
         {
             if(MoveObjects())
+            { 
                 SpawnLine();
+                return true;
+            }
+            else
+                return false;
         }
         public void ManualBrickAdd(XYZ pos, int health)
         {

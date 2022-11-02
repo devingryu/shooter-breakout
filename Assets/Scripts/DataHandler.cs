@@ -49,7 +49,7 @@ namespace SBR
             string FromJsonData = File.ReadAllText(highScoreFilePath);
             try
             {
-                return JsonUtility.FromJson<int>(FromJsonData);
+                return JsonUtility.FromJson<HighScoreInfo>(FromJsonData).highScore;
             }
             catch
             {
@@ -65,7 +65,7 @@ namespace SBR
             try
             {
                 HighScoreInfo h = new HighScoreInfo(data);
-                string json = JsonUtility.ToJson(data, true);
+                string json = JsonUtility.ToJson(h, true);
 
                 File.WriteAllText(highScoreFilePath, json);
             }

@@ -69,8 +69,8 @@ namespace SBR
                     remainingBallCount = MaxBallCount;
                     returnedBallCount = MaxBallCount;
                     ch.OnUpdateBulletCount(remainingBallCount, maxBallCount);
-                    spawner.NextRound();
-                    if (value > highScore)
+                    bool s = spawner.NextRound();
+                    if (value > highScore && s)
                     { 
                         HighScore = value;
                     }
